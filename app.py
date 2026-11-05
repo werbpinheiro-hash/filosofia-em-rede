@@ -81,6 +81,3 @@ if busca_livro.strip():
                     "Esta obra faz parte do catálogo inicial "
                     "da biblioteca física da escola. "
                     "Consulte o exemplar para aprofundar a leitura.")
-    else:
-        st.warning( "Nenhuma obra cadastrada para esse tema. "
-            "Experimente outra palavra.)
