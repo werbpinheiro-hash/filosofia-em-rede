@@ -1,234 +1,115 @@
 import streamlit as st
-from urllib.parse import quote_plus
 from pathlib import Path
+from urllib.parse import quote_plus
+import unicodedata
 
-st.set_page_config(
-    page_title="Filosofia em Rede",
-    page_icon="📚",
-    layout="wide"
-)
+st.set_page_config(page_title="Filosofia em Rede", page_icon="📚", layout="wide")
 
-st.markdown("""
-<style>
-.stApp {
-    background-color: #f8f9fc;
-    color: #202b40;
+
+def normalizar(texto):
+    texto = unicodedata.normalize("NFKD", texto.lower().strip())
+    return "".join(c for c in texto if not unicodedata.combining(c))
+
+
+CONTEUDOS = {
+    "liberdade": {
+        "conceito": "A liberdade envolve escolhas, autonomia e responsabilidade. Também depende das condições em que vivemos.",
+        "autores": ["Jean-Paul Sartre: escolhas e responsabilidade.", "Immanuel Kant: autonomia da razão.", "Hannah Arendt: liberdade e ação política."],
+        "questoes": ["Toda escolha é livre?", "As redes sociais influenciam nossas decisões?", "É possível ser livre sem responsabilidade?"]
+    },
+    "tecnologia": {
+        "conceito": "As tecnologias transformam a comunicação, a aprendizagem e as formas de acesso ao conhecimento.",
+        "autores": ["Michel Serres: mudanças na transmissão do saber.", "Marshall McLuhan: os meios de comunicação e seus efeitos.", "Pierre Lévy: cibercultura e inteligência coletiva."],
+        "questoes": ["Informação é o mesmo que conhecimento?", "Como a tecnologia modifica a escola?", "Quem controla a informação que recebemos?"]
+    },
+    "etica": {
+        "conceito": "A ética examina os valores, os argumentos e as consequências de nossas ações.",
+        "autores": ["Aristóteles: virtudes e vida boa.", "Immanuel Kant: dever e moralidade.", "Hans Jonas: responsabilidade diante da tecnologia."],
+        "questoes": ["O que torna uma ação justa?", "Compartilhar notícias sem verificar é responsável?", "Devemos pensar nas consequências futuras de nossas escolhas?"]
+    },
+    "politica": {
+        "conceito": "A filosofia política investiga o poder, a justiça, o Estado e a convivência coletiva.",
+        "autores": ["Platão: justiça e organização da cidade.", "Aristóteles: comunidade política.", "Michel Foucault: relações de poder."],
+        "questoes": ["Poder e autoridade são a mesma coisa?", "Como reconhecer uma decisão justa?", "A informação influencia a democracia?"]
+    },
+    "conhecimento": {
+        "conceito": "A teoria do conhecimento investiga como justificamos aquilo que afirmamos saber.",
+        "autores": ["Platão: opinião e conhecimento.", "René Descartes: dúvida e certeza.", "David Hume: experiência e investigação."],
+        "questoes": ["Como sabemos que algo é verdadeiro?", "Uma informação muito compartilhada é confiável?", "O que diferencia uma opinião de um argumento?"]
+    }
 }
-h1, h2, h3 {
-    color: #17365d;
-}
-.stButton > button {
-    background-color: #17365d;
-    color: white;
-    border-radius: 9px;
-}
-</style>
-""", unsafe_allow_html=True)
 
 st.title("📚 Filosofia em Rede")
 st.subheader("Conhecimento além da informação")
+st.write("Pesquise, compreenda, compare fontes e desenvolva seu pensamento crítico.")
 
-st.write(
-    "Uma plataforma educacional para pesquisar, "
-    "compreender e questionar informações por meio "
-    "do pensamento filosófico."
-)
+with st.form("busca"):
+    entrada = st.text_input("O que você deseja pesquisar?", placeholder="Ex.: liberdade, tecnologia, ética...")
+    pesquisar = st.form_submit_button("🔎 Pesquisar")
 
-st.divider()
-
-tema = st.text_input(
-    "🔎 O que você deseja pesquisar?",
-    placeholder="Ex.: liberdade, tecnologia, ética, política..."
-)
-
-conteudos = {
-    "liberdade": {
-        "conceito": (
-            "A liberdade envolve a possibilidade de escolher "
-            "e agir, mas também levanta questões sobre "
-            "responsabilidade, autonomia e condições sociais."
-        ),
-        "filosofos": [
-            "Jean-Paul Sartre — liberdade e responsabilidade.",
-            "Immanuel Kant — autonomia e razão.",
-            "Hannah Arendt — liberdade e ação política."
-        ],
-        "perguntas": [
-            "Somos realmente livres para escolher?",
-            "A sociedade limita nossa liberdade?",
-            "As redes sociais influenciam nossas decisões?"
-        ]
-    },
-    "tecnologia": {
-        "conceito": (
-            "A tecnologia transforma as formas de comunicação, "
-            "aprendizagem, trabalho e produção do conhecimento."
-        ),
-        "filosofos": [
-            "Michel Serres — transformações do saber.",
-            "Marshall McLuhan — os meios e suas influências.",
-            "Pierre Lévy — cibercultura e inteligência coletiva."
-        ],
-        "perguntas": [
-            "Ter acesso à informação significa conhecer?",
-            "A tecnologia modifica nossa maneira de pensar?",
-            "A escola ainda é o principal lugar do saber?"
-        ]
-    },
-    "ética": {
-        "conceito": (
-            "A ética investiga as ações humanas, os valores "
-            "e os critérios utilizados para distinguir "
-            "condutas justificáveis e injustificáveis."
-        ),
-        "filosofos": [
-            "Aristóteles — virtude e vida boa.",
-            "Immanuel Kant — dever e moralidade.",
-            "Hans Jonas — responsabilidade e tecnologia."
-        ],
-        "perguntas": [
-            "Toda atitude permitida é moralmente correta?",
-            "Quem responde pelas consequências da tecnologia?",
-            "Como agir diante de informações falsas?"
-        ]
-    },
-    "política": {
-        "conceito": (
-            "A filosofia política investiga o poder, "
-            "a autoridade, a justiça, o Estado "
-            "e a organização da vida coletiva."
-        ),
-        "filosofos": [
-            "Platão — justiça e organização da cidade.",
-            "Aristóteles — comunidade e vida política.",
-            "Michel Foucault — relações de poder."
-        ],
-        "perguntas": [
-            "Qual é a diferença entre poder e autoridade?",
-            "O poder está presente nas relações cotidianas?",
-            "Como a informação influencia a democracia?"
-        ]
-    }
-}
-
-def links_pesquisa(assunto):
-    busca = quote_plus(assunto)
-    return {
-        "Google Acadêmico":
-            "https://scholar.google.com/scholar?q=" + busca,
-        "SciELO":
-            "https://search.scielo.org/?q=" + busca,
-        "Portal de Periódicos CAPES":
-            "https://www.periodicos.capes.gov.br/",
-        "Internet Encyclopedia of Philosophy":
-            "https://iep.utm.edu/"
-    }
-
-if st.button("🔍 Pesquisar", type="primary"):
-    if not tema.strip():
-        st.warning("Digite um assunto para pesquisar.")
+if pesquisar:
+    if entrada.strip():
+        st.session_state["assunto"] = entrada.strip()
     else:
-        st.session_state["tema"] = tema.strip()
+        st.warning("Digite um tema antes de pesquisar.")
 
-if "tema" in st.session_state:
-    assunto = st.session_state["tema"]
-    chave = assunto.lower().strip()
-    dados = conteudos.get(chave)
-
+if "assunto" in st.session_state:
+    assunto = st.session_state["assunto"]
+    chave = normalizar(assunto)
+    dados = CONTEUDOS.get(chave)
     st.divider()
-    st.header("Resultado: " + assunto)
-
-    aba1, aba2, aba3, aba4 = st.tabs([
-        "📖 Informar",
-        "🧠 Compreender",
-        "❓ Problematizar",
-        "🔗 Fontes"
+    st.header("Pesquisa: " + assunto)
+    informar, compreender, problematizar, fontes = st.tabs([
+        "📖 Informar", "🧠 Compreender", "❓ Problematizar", "🔗 Fontes"
     ])
 
-    with aba1:
-        st.header("1. Informar")
+    with informar:
+        st.markdown("### 1. Informar")
         if dados:
             st.write(dados["conceito"])
         else:
-            st.info(
-                "Ainda não há uma explicação cadastrada "
-                "para este tema. Consulte as fontes "
-                "acadêmicas na quarta aba."
-            )
+            st.info("Este assunto ainda não está no catálogo. Consulte as fontes na última aba.")
 
-    with aba2:
-        st.header("2. Compreender")
+    with compreender:
+        st.markdown("### 2. Compreender")
         if dados:
-            st.write("Perspectivas filosóficas:")
-            for autor in dados["filosofos"]:
+            for autor in dados["autores"]:
                 st.write("• " + autor)
         else:
-            st.write(
-                "Pesquise diferentes autores e compare "
-                "suas interpretações sobre o tema."
-            )
+            st.write("Compare diferentes autores e verifique como justificam suas ideias.")
+        st.info("Compreender exige mais do que repetir uma informação: exige analisar seus argumentos.")
 
-        st.info(
-            "Não basta encontrar uma resposta. "
-            "É necessário compreender seus argumentos."
-        )
+    with problematizar:
+        st.markdown("### 3. Problematizar")
+        perguntas = dados["questoes"] if dados else [
+            "Quem produziu essa informação?",
+            "Que evidências sustentam essa afirmação?",
+            "Que outras interpretações são possíveis?"
+        ]
+        for pergunta in perguntas:
+            st.write("❓ " + pergunta)
+        reflexao = st.text_area("Escreva sua reflexão:", key="reflexao_aluno")
+        if reflexao.strip():
+            texto = "Tema: " + assunto + "\n\nReflexão:\n" + reflexao
+            st.download_button("⬇️ Baixar reflexão", data=texto, file_name="reflexao_filosofica.txt", mime="text/plain")
 
-    with aba3:
-        st.header("3. Problematizar")
-        if dados:
-            for pergunta in dados["perguntas"]:
-                st.write("❓ " + pergunta)
-        else:
-            st.write(
-                "Quem produziu essa informação? "
-                "Quais argumentos a sustentam? "
-                "Existem interpretações diferentes?"
-            )
-
-        resposta = st.text_area(
-            "Escreva sua reflexão:",
-            key="reflexao"
-        )
-
-        if resposta:
-            st.success(
-                "Reflexão registrada nesta sessão. "
-                "Continue desenvolvendo seus argumentos."
-            )
-
-    with aba4:
-        st.header("4. Pesquisar em fontes acadêmicas")
-        st.caption(
-            "Os links abrem pesquisas externas. "
-            "Os resultados ainda não são verificados "
-            "automaticamente pela plataforma."
-        )
-
-        for nome, endereco in links_pesquisa(assunto).items():
-            st.markdown(f"🔗 [{nome}]({endereco})")
+    with fontes:
+        st.markdown("### 4. Investigar as fontes")
+        st.write("Acesse resultados externos e confira autoria, data e argumentos de cada publicação.")
+        consulta = quote_plus(assunto)
+        st.markdown("[Pesquisar no Google Acadêmico](https://scholar.google.com/scholar?q=" + consulta + ")")
+        st.markdown("[Pesquisar na SciELO](https://search.scielo.org/?q=" + consulta + ")")
+        st.markdown("[Portal de Periódicos CAPES](https://www.periodicos.capes.gov.br/)")
+        st.caption("Os resultados externos não são avaliados automaticamente pelo aplicativo.")
 
 st.divider()
-
 st.header("📚 Biblioteca Filosófica")
-
-pdf = Path("A Liberdade em Jean Paul Sartre.pdf")
-
-if pdf.exists():
-    with open(pdf, "rb") as arquivo:
-        st.download_button(
-            "📄 A Liberdade em Jean-Paul Sartre",
-            data=arquivo.read(),
-            file_name=pdf.name,
-            mime="application/pdf"
-        )
+pdfs = sorted(Path(__file__).resolve().parent.glob("*.pdf"))
+if pdfs:
+    for pdf in pdfs:
+        with pdf.open("rb") as arquivo:
+            st.download_button("📄 " + pdf.stem, data=arquivo.read(), file_name=pdf.name, mime="application/pdf", key=pdf.name)
 else:
-    st.info(
-        "A biblioteca poderá receber livros e "
-        "materiais de estudo selecionados."
-    )
+    st.info("Adicione arquivos PDF à pasta principal do repositório para aparecerem aqui.")
 
-st.divider()
-
-st.caption()
-    "Filosofia em Rede | Protótipo educacional"
-    "| Pesquisa, pensamento crítico e conhecimento."
+st.caption("Filosofia em Rede | Protótipo educacional | Pesquisa e pensamento crítico")
