@@ -230,5 +230,5 @@ else:
 st.divider()
 
 st.caption()
-    "Filosofia em Rede | Protótipo educacional "
+    "Filosofia em Rede | Protótipo educacional"
     "| Pesquisa, pensamento crítico e conhecimento."
