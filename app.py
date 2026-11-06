@@ -135,7 +135,7 @@ livros = [
     "as aparências e questionar aquilo que consideramos verdadeiro. "
     "O problema filosófico consiste em compreender como podemos "
     "distinguir a realidade das ilusões que fazem parte da nossa experiência."
-),
+)
         "temas": "mitologia, cultura, deuses, narrativa, tradição",
         "resumo": "Reconta narrativas da mitologia grega, permitindo investigar seus significados culturais.",
         "problema": "O que os mitos revelam sobre a maneira humana de compreender o mundo?"
