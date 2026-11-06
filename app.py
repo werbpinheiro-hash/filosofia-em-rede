@@ -127,7 +127,7 @@ livros = [
         "temas": "verdade, conhecimento, aparência, educação, realidade",
         "resumo": "Alegoria que permite refletir sobre aparência, ignorância e conhecimento.",
         "problema": "Como reconhecer que nossas certezas podem estar equivocadas?"
-       "A palavra do Professor": (
+       "A palavra do Professor":
     "No mito da caverna de Platão, iremos observar o processo "
     "de descoberta de duas realidades humanas: o mundo da verdade "
     "e o mundo das aparências. Platão utiliza essa alegoria para "
@@ -135,7 +135,6 @@ livros = [
     "as aparências e questionar aquilo que consideramos verdadeiro. "
     "O problema filosófico consiste em compreender como podemos "
     "distinguir a realidade das ilusões que fazem parte da nossa experiência."
-)
         "temas": "mitologia, cultura, deuses, narrativa, tradição",
         "resumo": "Reconta narrativas da mitologia grega, permitindo investigar seus significados culturais.",
         "problema": "O que os mitos revelam sobre a maneira humana de compreender o mundo?"
