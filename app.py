@@ -127,6 +127,8 @@ livros = [
         "temas": "verdade, conhecimento, aparência, educação, realidade",
         "resumo": "Alegoria que permite refletir sobre aparência, ignorância e conhecimento.",
         "problema": "Como reconhecer que nossas certezas podem estar equivocadas?"
+        "A palavra do Professor": "No mito da caverna de Platão iremos observar o processo de descoberta de duas realidades humanas: o mundo da verdade e o mundo
+        da ignorância. Sua leitura propiciará, a você leitor, a oportunidade de escolher qual mundo pertencer."
     },
     {
         "titulo": "Mitos Gregos",
