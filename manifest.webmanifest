@@ -1,7 +1,10 @@
+
 {
+  "id": "./",
   "name": "Polegares",
   "short_name": "Polegares",
   "description": "Conhecimento além da informação",
+  "lang": "pt-BR",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
