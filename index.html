@@ -9,86 +9,59 @@
   <title>Polegares</title>
 
   <meta name="theme-color" content="#173B63">
-  <meta name="description"
-        content="Conhecimento além da informação">
 
   <link rel="manifest"
         href="./manifesto.webmanifest">
 
   <link rel="icon"
-        type="image/png"
-        href="./ícones/ícone-192.png">
-
-  <link rel="apple-touch-icon"
-        href="./ícones/ícone-192.png">
+        href="./ícones/ícone-192.png"
+        type="image/png">
 
   <style>
-    * {
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #173B63;
+      color: white;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
       box-sizing: border-box;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      font-family: Arial, sans-serif;
+    img {
+      width: 150px;
+      height: 150px;
+      object-fit: contain;
+      border-radius: 25px;
+    }
+
+    a {
       background: #ffffff;
-    }
-
-    header {
-      background: #173B63;
-      color: white;
-      text-align: center;
-      padding: 10px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 22px;
-    }
-
-    iframe {
-      display: block;
-      width: 100%;
-      height: calc(100dvh - 100px);
-      border: none;
-      background: white;
-    }
-
-    footer {
-      text-align: center;
-      padding: 8px;
-      background: #173B63;
-    }
-
-    footer a {
-      color: white;
-      font-size: 14px;
+      color: #173B63;
+      padding: 15px 25px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 25px;
     }
   </style>
 </head>
 
 <body>
+  <img src="./ícones/ícone-512.png"
+       alt="Logomarca Polegares">
 
-  <header>
-    <h1>Polegares</h1>
-  </header>
+  <h1>Polegares</h1>
 
-  <iframe
-    title="Biblioteca Filosófica Polegares"
-    src="https://filosofia-em-rede-ysnkwrxnfcsr3jhqpat5yt.streamlit.app/"
-    allow="fullscreen"
-  ></iframe>
+  <p>Conhecimento além da informação</p>
 
-  <footer>
-    <a
-      href="https://filosofia-em-rede-ysnkwrxnfcsr3jhqpat5yt.streamlit.app/"
-      target="_blank"
-      rel="noopener noreferrer">
-      Abrir biblioteca diretamente
-    </a>
-  </footer>
-
+  <a href="https://filosofia-em-rede-ysnkwrxnfcsr3jhqpat5yt.streamlit.app/">
+    Entrar na Biblioteca Filosófica
+  </a>
 </body>
 </html>
