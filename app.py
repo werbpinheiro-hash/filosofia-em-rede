@@ -1,16 +1,3 @@
-st.set_page_config(
-    page_title="Filosofia em Rede",
-    page_icon="📚",
-    layout="wide"
-)
-
-import streamlit as st
-
-st.set_page_config(
-    page_title="Polegares",
-    page_icon="Estudante com Livro e Smartphone.png",
-    layout="wide"
-)
 st.write(
     "Da pesquisa digital à leitura filosófica. "
     "Explore as obras disponíveis na biblioteca escolar, "
