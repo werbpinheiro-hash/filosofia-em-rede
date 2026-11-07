@@ -14,8 +14,8 @@ st.title("📖 Polegares")
 st.subheader("Um pouco de ruído, o menor elemento do acaso, transforma um sistema ou ordem em outro")
 
 st.write(
-    "Da pesquisa digital à leitura filosófica. "
-    "Explore as obras disponíveis na biblioteca escolar, "
+    "letramento digital e aproximação com a leitura filosófica. "
+    "Explore as obras disponíveis na biblioteca da escola Campos Brasil, "
     "conheça seus autores e investigue problemas filosóficos."
 )
 
