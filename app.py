@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 st.title("📖 Polegares")
-st.subheader("Conhecimento além da informação")
+st.subheader("Um pouco de ruído, o menor elemento do acaso, transforma um sistema ou ordem em outro")
 
 st.write(
     "Da pesquisa digital à leitura filosófica. "
