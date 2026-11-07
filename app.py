@@ -11,10 +11,10 @@ st.set_page_config(
 )
 
 st.title("📖 Polegares")
-st.subheader("Um pouco de ruído, o menor elemento do acaso, transforma um sistema ou ordem em outro")
+st.subheader("Um pouco de ruído, o menor elemento do acaso, transforma um sistema ou ordem em outro. Michel Serres")
 
 st.write(
-    "letramento digital e aproximação com a leitura filosófica. "
+    "Letramento digital e aproximação com a leitura filosófica. "
     "Explore as obras disponíveis na biblioteca da escola Campos Brasil, "
     "conheça seus autores e investigue problemas filosóficos."
 )
