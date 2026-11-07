@@ -5,12 +5,12 @@ from pathlib import Path
 from urllib.parse import quote_plus
 
 st.set_page_config(
-    page_title="Filosofia em Rede",
-    page_icon="📚",
+    page_title="Polegares",
+    page_icon="📖",
     layout="wide"
 )
 
-st.title("📚 Filosofia em Rede")
+st.title("📖 Polegares")
 st.subheader("Conhecimento além da informação")
 
 st.write(
