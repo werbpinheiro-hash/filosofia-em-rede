@@ -1,28 +1,95 @@
-{
-  "id": "./",
-  "name": "Polegares",
-  "short_name": "Polegares",
-  "description": "Aplicativo de pesquisa filosófica",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ]
+import streamlit as st
+import unicodedata
+from pathlib import Path
+from urllib.parse import quote_plus
+
+# Localização da logomarca
+LOGO = Path(__file__).parent / "logo.png"
+
+# Configuração do aplicativo
+st.set_page_config(
+    page_title="Polegares",
+    page_icon=str(LOGO) if LOGO.exists() else "📖",
+    layout="centered",
+    initial_sidebar_state="collapsed"
+)
+
+# Logomarca no cabeçalho
+if LOGO.exists():
+    st.logo(str(LOGO))
+
+# Personalização visual com CSS
+st.markdown("""
+<style>
+
+.titulo-polegares {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 700;
+    color: #245B78;
+    margin-bottom: 15px;
 }
+
+.citacao-serres {
+    text-align: center;
+    font-size: 17px;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+.descricao-app {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# Logomarca centralizada
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col2:
+    if LOGO.exists():
+        st.image(str(LOGO), use_container_width=True)
+
+# Nome do aplicativo
+st.markdown("""
+<div class="titulo-polegares">
+    Polegares
+</div>
+""", unsafe_allow_html=True)
+
+# Citação de Michel Serres
+st.markdown("""
+<div class="citacao-serres">
+    “Um pouco de ruído, o menor elemento do acaso,
+    transforma um sistema ou ordem em outro.”
+    <br>— Michel Serres
+</div>
+""", unsafe_allow_html=True)
+
+# Apresentação do aplicativo
+st.markdown("""
+<div class="descricao-app">
+    Letramento digital e aproximação com a leitura filosófica.
+    Explore as obras disponíveis na biblioteca da escola
+    Campos Brasil, conheça seus autores e investigue
+    problemas filosóficos.
+</div>
+""", unsafe_allow_html=True)
+
+st.divider()
+
+# Função de normalização da pesquisa
+def normalizar(texto):
+    texto = str(texto).lower().strip()
+    texto = unicodedata.normalize("NFD", texto)
+    return "".join(
+        letra for letra in texto
+        if unicodedata.category(letra) != "Mn"
+    )
 
 # CATÁLOGO DA BIBLIOTECA
 
